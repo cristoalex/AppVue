@@ -2,53 +2,104 @@
   <h3>
     Bienvenido
   </h3>
+
   <div>
+    <h1>NASA Mars Photos</h1>
 
-    <main>
-      <div class="box" v-for="todo in todos" :key="todo.id">
-        <h2>{{ todo.title }}</h2>
-        <h3>{{ todo.subtitle }}</h3>
-        <p>{{ todo.body }}y</p>
-        <img src="../assets/logo.png" alt="Imagen 1">
+    <div class="search-bar">
+      <label for="camera-input">Search by Camera:</label>
+      <input type="text" id="camera-input" v-model="filter" @keyup.enter="searchPhotos">
+      <button @click="searchPhotos">Search</button>
+    </div>
+
+    <div class="gallery">
+      <div class="row">
+
+        <main>
+          <div class="box" v-for="photo in filteredPhotos" :key="photo.id">
+            <img class="zoomable-image" :src="photo.img_src" :alt="photo.camera.full_name" alt="Image 1" />
+            <p>Camera: {{ photo.camera.full_name }}</p>
+            <p>ID: {{ photo.id }}</p>
+          </div>
+
+        </main>
+
       </div>
-    </main>
-
+      <button v-if="hasMorePages" @click="loadMore">Ver mas</button>
+    </div>
   </div>
 </template>
 
-/*<img :src="todo.image" class="img" alt="Imagen 1" />*/
 
 <script>
+/*<img :src="todo.image" class="img" alt="Imagen 1" />*/
 
 
-import axios from 'axios';
+import axios from "axios";
 
 export default {
-
   data() {
     return {
-      todos: [],
+      photos: [],
+      filter: '',
+      currentPage: 1,
+      itemsPerPage: 20,
     };
   },
-
   mounted() {
-    this.Obtener();
+    axios
+      .get(
+        "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=jt77zbTpHbtglGHYdi9qH27I32kHDB5aCtsoKsqY"
+      )
+      .then((response) => {
+        this.photos = response.data.photos.slice(0, this.itemsPerPage);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+
+  computed: {
+    filteredPhotos() {
+      return this.photos.filter((photo) => {
+        return photo.camera.full_name.toLowerCase().includes(this.filter.toLowerCase()) || photo.id.toString().includes(this.filter.toLowerCase());
+      });
+    },
+
+    allPhotos() {
+      return this.photos.concat(this.filteredPhotos);
+    },
+    hasMorePages() {
+      return this.currentPage * this.itemsPerPage < this.allPhotos.length;
+    },
+
   },
 
   methods: {
-    Obtener() {
+    searchPhotos() {
       axios
-        .get("http://localhost:3000/posts")
+        .get(
+          `https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&camera=${this.filter}&api_key=jt77zbTpHbtglGHYdi9qH27I32kHDB5aCtsoKsqY`
+        )
         .then((response) => {
-          console.log(response.data);
-          this.todos = response.data;
+          this.photos = response.data.photos;
         })
-        .catch((e) => console.log(e));
+        .catch((error) => {
+          console.log(error);
+        });
     },
+
+    loadMore() {
+      this.currentPage++;
+      const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+      const endIndex = this.currentPage * this.itemsPerPage;
+      const newPhotos = this.allPhotos.slice(startIndex, endIndex);
+      this.photos = [...this.photos, ...newPhotos];
+    },
+
+
   },
-
 };
-
 </script>
 
 <style>
@@ -132,5 +183,13 @@ main {
   .box {
     margin-bottom: 1em;
   }
+}
+
+.zoomable-image {
+  transition: transform 0.5s ease;
+}
+
+.zoomable-image:hover {
+  transform: scale(2.5);
 }
 </style>
