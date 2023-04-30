@@ -17,7 +17,7 @@
 
         <main>
           <div class="box" v-for="photo in filteredPhotos" :key="photo.id">
-            <img class="zoomable-image" :src="photo.img_src" :alt="photo.camera.full_name" alt="Image 1" />
+            <img class="zoomable-image" :src="photo.img_src" :alt="photo.camera.full_name" />
             <p>Camera: {{ photo.camera.full_name }}</p>
             <p>ID: {{ photo.id }}</p>
           </div>
@@ -37,7 +37,7 @@
 
 import axios from "axios";
 
-export default {
+export default{
   data() {
     return {
       photos: [],
@@ -159,13 +159,13 @@ main {
 }
 
 /* Estilos para pantallas más pequeñas */
-@media (max-width: 1500px) {
+@media (max-width: 2000px) {
 
   /* Cambiar a dos columnas */
   main {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(3, auto);
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(4, auto);
     gap: 1em;
   }
 }
@@ -190,6 +190,6 @@ main {
 }
 
 .zoomable-image:hover {
-  transform: scale(2.5);
+  transform: scale(2);
 }
 </style>

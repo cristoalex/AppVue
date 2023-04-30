@@ -18,23 +18,35 @@ const routes = [
     }
   },
   {
-    path: '/musica',
-    name: 'musica',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
+    path: '/contacto',
+    name: 'contacto',
+
     component: function () {
-      return import(/* webpackChunkName: "about" */ '../views/Contacto.vue')
+      return import('../views/Contacto.vue')
     }
   },
   {
     path: '/acerca',
     name: 'acerca',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
+
     component: function () {
-      return import(/* webpackChunkName: "about" */ '../views/Acerca.vue')
+      return import('../views/Acerca.vue')
+    }
+  },
+  {
+    path: '/proyectos',
+    name: 'proyectos',
+
+    component: function () {
+      return import('../views/Proyectos.vue')
+    }
+  },
+  {
+    path: '/Tabla_proyectos',
+    name: 'Tabla_proyectos',
+
+    component: function () {
+      return import( '../views/Tabla_Proyectos.vue')
     }
   }
 ]

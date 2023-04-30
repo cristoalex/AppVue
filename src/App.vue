@@ -3,9 +3,12 @@
     <nav>
       <ul>
         <li><router-link to="/">Home</router-link></li>
+        <li><router-link to="/proyectos">Proyectos</router-link></li>
+        <li><router-link to="/Tabla_proyectos">Tabla de proyectos</router-link></li>
         <li><router-link to="/about">Politicas</router-link></li>
-        <li><router-link to="/musica">Contacto</router-link></li>
+        <li><router-link to="/contacto">Contacto</router-link></li>
         <li><router-link to="/acerca">Acerca de mi</router-link></li>
+        
       </ul>
     </nav>
   </header>
