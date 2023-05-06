@@ -34,14 +34,6 @@ const routes = [
     }
   },
   {
-    path: '/proyectos',
-    name: 'proyectos',
-
-    component: function () {
-      return import('../views/Proyectos.vue')
-    }
-  },
-  {
     path: '/Tabla_proyectos',
     name: 'Tabla_proyectos',
 

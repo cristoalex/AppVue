@@ -5,6 +5,11 @@
       <h3>{{ project.title }}</h3>
       <h4>{{ project.description }}</h4>
       <h4>{{ project.benefits }}</h4>
+      <h2>{{ project.startYear }}</h2>
+      <h2 >{{ project.endDateString }}</h2>
+      <p>{{ project.website }}</p>
+      
+      
       
     </div>
   </template>
@@ -37,3 +42,6 @@
     }
   };
   </script>
+  <style>
+
+</style>

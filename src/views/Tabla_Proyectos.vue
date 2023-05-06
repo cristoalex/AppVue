@@ -1,8 +1,10 @@
 <template>
-  <div>
-    <button @click="loadMoreProjects">Cargar más proyectos</button>
-    <button @click="loadLessProjects">Mostrar menos</button>
-    <table v-show="!showProjectDetails">
+  <div class="container">
+    <button class="btn-load-more" @click="loadMoreProjects">
+      Cargar más proyectos
+    </button>
+    <button class="btn-show-less" @click="loadLessProjects">Mostrar menos</button>
+    <table v-show="!showProjectDetails" class="project-table">
       <thead>
         <tr>
           <th>ID del proyecto</th>
@@ -14,24 +16,28 @@
         <tr v-for="project in getProjectsSlice()" :key="project.id">
           <td>{{ project.projectId }}</td>
           <td>{{ project.lastUpdated }}</td>
-          <button @click="buscarProyecto(project)">Ver Detalles</button>
+          <td><button class="btn-details" @click="buscarProyecto(project)">Ver Detalles</button></td>
         </tr>
       </tbody>
     </table>
-    <div v-if="showProjectDetails">
-      <h3>{{ project.title }}</h3>
-      <h4>{{ project.description }}</h4>
-      <h4>{{ project.benefits }}</h4>
-      <button @click="showProjectDetails = false">
+    <div v-if="showProjectDetails" class="project-details">
+      <h3 class="project-title">{{ project.title }}</h3>
+      <h2 class="project-title">Año de desarrollo: {{ project.startYear }}</h2>
+      <h2 class="project-title">Año de Terminacion: {{ project.endDateString }}</h2>
+      <p class="project-description" v-html="project.responsibleMd.organizationName"></p>
+      <p class="project-description">Sitio Web: {{ project.website }}</p>
+      <p class="project-description" v-html="project.program.description"></p>
+      <p class="project-description" v-html="project.description"></p>
+      <p class="project-description" v-html="project.benefits"></p>
+      
+      <button class="btn-back" @click="showProjectDetails = false">
         Regresar a la lista de proyectos
       </button>
     </div>
   </div>
-</template>
-  
+</template> 
   <script>
 import axios from "axios";
-
 export default {
   data() {
     return {
@@ -72,7 +78,6 @@ export default {
         this.numProjectsToShow = 0;
       }
     },
-
     buscarProyecto(project) {
       axios
         .get(
@@ -91,3 +96,118 @@ export default {
 };
 </script>
   
+<style>
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.btn-load-more {
+  background-color: #008CBA;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin-right: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-load-more:hover {
+  background-color: #005b82;
+}
+
+.btn-show-less {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-show-less:hover {
+  background-color: #b90013;
+}
+
+.project-table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+
+.project-table th {
+  background-color: #f2f2f2;
+  text-align: left;
+  padding: 8px;
+}
+
+.project-table td {
+  border-bottom: 1px solid #ddd;
+  padding: 8px;
+}
+
+.btn-details {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-details:hover {
+  background-color: #2e8b57;
+}
+
+.project-details {
+  margin-top: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 20px;
+  background-color: #fff;
+  text-align: justify;
+}
+
+.project-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.project-description {
+  margin-bottom: 10px;
+}
+
+.project-benefits {
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.btn-back {
+background-color: #008CBA;
+color: white;
+border: none;
+border-radius: 5px;
+padding: 10px 20px;
+cursor: pointer;
+transition: all 0.3s ease-in-out;
+}
+
+.btn-back:hover {
+background-color: #005b82;
+}
+
+@media screen and (max-width: 600px) {
+.container {
+padding: 10px;
+}
+
+.btn-load-more {
+margin-bottom: 10px;
+}
+}
+</style>
