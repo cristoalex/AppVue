@@ -25,7 +25,7 @@
         </main>
 
       </div>
-      <button v-if="hasMorePages" @click="loadMore">Ver mas</button>
+      <button class="btn-back" v-if="hasMorePages" @click="loadMore">Ver mas</button>
     </div>
   </div>
 </template>
@@ -43,7 +43,7 @@ export default{
       photos: [],
       filter: '',
       currentPage: 1,
-      itemsPerPage: 20,
+      itemsPerPage: 10,
     };
   },
   mounted() {
@@ -133,7 +133,7 @@ main {
 }
 
 .box img {
-  max-width: 100%;
+  max-width: 80%;
   height: auto;
   border-radius: 5px;
   margin-bottom: 1em;
@@ -159,7 +159,7 @@ main {
 }
 
 /* Estilos para pantallas más pequeñas */
-@media (max-width: 2000px) {
+@media (max-width: 2600px) {
 
   /* Cambiar a dos columnas */
   main {
@@ -191,5 +191,20 @@ main {
 
 .zoomable-image:hover {
   transform: scale(2);
+}
+.btn-back{
+background-color: #2b09a4;
+color: white;
+border: none;
+border-radius: 10px;
+padding: 30px 30px;
+cursor: pointer;
+transition: all 0.3s ease-in-out;
+display: flex;
+justify-content: center;
+}
+
+.btn-back:hover {
+background-color: #c40c15;
 }
 </style>
