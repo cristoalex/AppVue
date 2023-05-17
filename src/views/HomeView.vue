@@ -164,14 +164,14 @@ main {
   /* Cambiar a dos columnas */
   main {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(4, auto);
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, auto);
     gap: 1em;
   }
 }
 
 /* Estilos para pantallas más pequeñas */
-@media (max-width: 480px) {
+@media (max-width: 400px) {
 
   /* Cambiar a una sola columna */
   main {

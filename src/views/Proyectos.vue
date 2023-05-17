@@ -1,7 +1,7 @@
 <template>
     <div>
       <input type="text" v-model="projectId" />
-      <button @click="buscarProyecto()">Buscar</button>
+      <button @click="Proyecto()">Buscar</button>
       <h3>{{ project.title }}</h3>
       <h4>{{ project.description }}</h4>
       <h4>{{ project.benefits }}</h4>
@@ -26,7 +26,7 @@
       };
     },
     methods: {
-      buscarProyecto() {
+      Proyecto() {
         axios
           .get(
             `https://api.nasa.gov/techport/api/projects/${this.projectId}?api_key=${this.apiKey}`

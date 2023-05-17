@@ -40,7 +40,7 @@ const routes = [
     component: function () {
       return import( '../views/Tabla_Proyectos.vue')
     }
-  }
+  },
 ]
 
 const router = createRouter({

@@ -4,6 +4,18 @@
       Cargar más proyectos
     </button>
     <button class="btn-show-less" @click="loadLessProjects">Mostrar menos</button>
+    <br><br>
+    <div v-if="!showProjectDetails" class="buscador">
+      <input type="text" v-model="projectId" />
+      <button @click="Proyecto()">Buscar</button>
+      <button @click="cerrarProyecto()">Cerrar</button>
+
+      <h3>{{ project.title }}</h3>
+      <div v-html="project.description"></div>
+      <div v-html="project.benefits"></div>
+
+    </div>
+
     <table v-show="!showProjectDetails" class="project-table">
       <thead>
         <tr>
@@ -29,14 +41,15 @@
       <p class="project-description" v-html="project.program.description"></p>
       <p class="project-description" v-html="project.description"></p>
       <p class="project-description" v-html="project.benefits"></p>
-      
+
       <button class="btn-back" @click="showProjectDetails = false">
         Regresar a la lista de proyectos
       </button>
     </div>
+
   </div>
 </template> 
-  <script>
+<script>
 import axios from "axios";
 export default {
   data() {
@@ -45,6 +58,7 @@ export default {
       apiKey: "jt77zbTpHbtglGHYdi9qH27I32kHDB5aCtsoKsqY",
       numProjectsToShow: 10,
       project: {},
+      projectId: "",
       showProjectDetails: false,
     };
   },
@@ -52,6 +66,22 @@ export default {
     this.getProjects();
   },
   methods: {
+    Proyecto() {
+      axios
+        .get(
+          `https://api.nasa.gov/techport/api/projects/${this.projectId}?api_key=${this.apiKey}`
+        )
+        .then((response) => {
+          console.log(response.data);
+          this.project = response.data.project;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    cerrarProyecto() {
+      this.project = {};
+    },
     getProjects() {
       axios
         .get(
@@ -75,7 +105,7 @@ export default {
       if (this.numProjectsToShow > 10) {
         this.numProjectsToShow -= 10;
       } else {
-        this.numProjectsToShow = 0;
+        this.numProjectsToShow = 10;
       }
     },
     buscarProyecto(project) {
@@ -95,8 +125,12 @@ export default {
   },
 };
 </script>
+
   
 <style>
+.buscador{
+  text-align: justify;
+}
 .container {
   max-width: 800px;
   margin: 0 auto;
@@ -188,26 +222,26 @@ export default {
 }
 
 .btn-back {
-background-color: #008CBA;
-color: white;
-border: none;
-border-radius: 5px;
-padding: 10px 20px;
-cursor: pointer;
-transition: all 0.3s ease-in-out;
+  background-color: #008CBA;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
 }
 
 .btn-back:hover {
-background-color: #005b82;
+  background-color: #005b82;
 }
 
 @media screen and (max-width: 600px) {
-.container {
-padding: 10px;
-}
+  .container {
+    padding: 10px;
+  }
 
-.btn-load-more {
-margin-bottom: 10px;
-}
+  .btn-load-more {
+    margin-bottom: 10px;
+  }
 }
 </style>
