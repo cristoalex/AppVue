@@ -55,7 +55,7 @@
 
       <p class="footer-company-about">
         <span>About the company</span>
-        Con el obejtivo de crear un nuevo sueño hacia lo deconocido.
+        Con el obejtivo de crear un nuevo sueño hacia lo dezconocido.
       </p>
 
     </div>
