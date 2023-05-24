@@ -66,6 +66,8 @@
   margin: 0 auto;
   max-width: 20cm;
   padding-left: 10cm;
+  padding-top: 2.5cm;
+  padding-bottom: 5cm;
   padding-right: 10cm;
   text-align: justify;
 }

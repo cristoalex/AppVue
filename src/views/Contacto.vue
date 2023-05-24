@@ -6,16 +6,9 @@
       sugerencia, no dudes en contactarme a través de los siguientes medios:
     </p>
 
-    <p>Correo electrónico: [tu dirección de correo electrónico]</p>
-    <p>Teléfono: [tu número de teléfono]</p>
-    <p>Redes sociales: [enlaces a tus perfiles en redes sociales]</p>
-
-    Formulario de contacto: [enlace a un formulario de contacto en tu sitio web]
-
-    <br />
-    También puedes visitar mi oficina en [dirección de tu oficina] durante las
-    siguientes horas: [Lunes a viernes]: [horario de atención de tu oficina]
-    <br />
+    <p>Correo electrónico: crisramosor@gmail.com</p>
+    <p>Teléfono: +52 932 203 5900</p>
+    <p>Redes sociales: enlace de git hub</p>
     <p>
       Estoy deseando escuchar de ti y responder a cualquier pregunta o
       preocupación que puedas tener. Gracias de nuevo por visitar mi sitio web y
@@ -29,8 +22,12 @@
 </template>
 <style>
 .container {
+  margin: 0 auto;
+  max-width: 20cm;
+  padding-left: 10cm;
+  padding-top: 2.5cm;
+  padding-bottom: 5cm;
+  padding-right: 10cm;
   text-align: justify;
-  margin-left: 10cm;
-  margin-right: 10cm;
 }
 </style>
